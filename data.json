@@ -1,20 +1,3 @@
 [
-    {
-        "user_name": "karen",
-        "user_email": "qqq",
-        "topic": "no se",
-        "message": "aaaa",
-        "images": [],
-        "state": "pending",
-        "department": "Biolog\u00eda Vegetal"
-    },
-    {
-        "user_name": "q",
-        "user_email": "q",
-        "topic": "q",
-        "message": "q",
-        "images": [],
-        "state": "pending",
-        "department": "Microbiolog\u00eda"
-    }
+
 ]
