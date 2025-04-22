@@ -1,5 +1,5 @@
 import streamlit as st
-from .model import WebPostRequest
+from model import WebPostRequest
 
 def main():
     st.title("Petición sobre publicación en página web")

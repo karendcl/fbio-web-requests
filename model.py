@@ -1,6 +1,6 @@
 
 import states
-from . import automation
+import automation
 
 
 class WebPostRequest:
