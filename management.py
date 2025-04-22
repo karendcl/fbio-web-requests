@@ -1,17 +1,55 @@
+import json
+
 import streamlit as st
 import pandas as pd
 from datetime import datetime
 
+from github import Github
+
 # MUST be first command
 st.set_page_config(layout="wide")
 
-JSON_URL = "https://raw.githubusercontent.com/karendcl/fbio-web-requests/main/data.json"
+REPO_URL = "https://raw.githubusercontent.com/karendcl/fbio-web-requests/main/"
+GITHUB_TOKEN = st.secrets["github_token"]  # Use Streamlit secrets in production
+REPO_NAME = "karendcl/fbio-web-requests"  # Your repo
+FILE_PATH = "data.json"  # Path to your JSON file
+BRANCH = "main"  # Branch to update
+
+def reqest_posted(row):
+    """Update the status of the request to 'posted'.
+    Remove the images from the github repository.
+    """
+
+    g = Github(GITHUB_TOKEN)
+    repo = g.get_repo(REPO_NAME)
+
+    # Get current JSON file
+    file = repo.get_contents(FILE_PATH, ref=BRANCH)
+    sha = file.sha
+    current_data = json.loads(file.decoded_content.decode())
+
+    # Update the status of the request
+    for request in current_data:
+        if request['timestamp'] == row['timestamp']:
+            request['state'] = 'posted'
+            break
+
+    # Save the updated JSON file
+    repo.update_file(
+        path=FILE_PATH,
+        message="Update request status to posted",
+        content=json.dumps(current_data),
+        sha=sha,
+        branch=BRANCH
+    )
 
 
-@st.cache_data(ttl=600)
+
+
+# @st.cache_data(ttl=600)
 def load_data():
     try:
-        response = pd.read_json(JSON_URL)
+        response = pd.read_json(REPO_URL + 'data.json')
         # Convert timestamp to datetime if it exists
         if 'timestamp' in response.columns:
             response['timestamp'] = pd.to_datetime(response['timestamp'])
@@ -95,7 +133,7 @@ def main():
     col3.metric("Completed", len(filtered_df[filtered_df['state'] == 'posted']))
 
     # Display data with action buttons
-    for _, row in filtered_df.iterrows():
+    for row_index, row in filtered_df.iterrows():
         with st.expander(f"{row.get('user_name', 'N/A')} - {row.get('state', 'N/A')} - "
                          f"{row.get('timestamp', '').strftime("%Y%m%d_%H%M%S") if pd.notna(row.get('timestamp')) else 'No Date'}",
                          expanded=False):
@@ -116,7 +154,21 @@ def main():
                 cols = st.columns(min(3, len(row['images'])))
                 for i, img_url in enumerate(row['images']):
                     with cols[i % 3]:
-                        st.image(img_url, width=150)
+                        path = REPO_URL + img_url
+                        path = path.replace(' ', '%20')
+
+                        st.markdown(f"[Download Image {i}]({path})", unsafe_allow_html=True)
+
+            # Action buttons
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("Posted", key=f"approve_{row_index}"):
+
+
+
+
+
+
 
 
 if __name__ == "__main__":

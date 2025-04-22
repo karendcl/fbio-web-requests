@@ -19,12 +19,14 @@ class WebPostRequest:
         self.state = states.PENDING
         self.department = department
         self.timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.code = hash(f"{self.user_name}{self.topic}{self.department}{self.message}")
 
         self.save_to_json()
 
     def save_to_json(self):
 
         new_data = {
+            'code': self.code,
             'user_name': self.user_name,
             'user_email': self.user_email,
             'topic': self.topic,
