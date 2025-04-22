@@ -1,7 +1,7 @@
 
 import states
 import automation
-
+import datetime
 
 class WebPostRequest:
     def __init__(self,
@@ -18,6 +18,7 @@ class WebPostRequest:
         self.images = images
         self.state = states.PENDING
         self.department = department
+        self.timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
         self.save_to_json()
 
@@ -30,7 +31,8 @@ class WebPostRequest:
             'message': self.message,
             'images': self.images,
             'state': self.state,
-            'department': self.department
+            'department': self.department,
+            'timestamp': self.timestamp
         }
 
         automation.update_json(new_data=new_data)
