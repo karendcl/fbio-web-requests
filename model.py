@@ -1,8 +1,7 @@
-import json
 
 import states
-import automation
-import os
+from . import automation
+
 
 class WebPostRequest:
     def __init__(self,
