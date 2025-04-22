@@ -27,5 +27,16 @@
         ],
         "state": "pending",
         "department": "CEP"
+    },
+    {
+        "user_name": "q",
+        "user_email": "q",
+        "topic": "q",
+        "message": "q",
+        "images": [
+            "data/image_20250422_170245_Instalar nuevo gestor de base de datos.png"
+        ],
+        "state": "pending",
+        "department": "Otro"
     }
 ]
