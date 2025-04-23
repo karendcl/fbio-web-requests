@@ -34,5 +34,14 @@
         "images": [],
         "state": "posted",
         "department": "Microbiolog\u00eda"
+    },
+    {
+        "user_name": "Prueba 2",
+        "user_email": "Karen.canterolopez@gmail.com",
+        "topic": "Pruebabaaaaa",
+        "message": "Jsjdnd",
+        "images": [],
+        "state": "pending",
+        "department": "Otro"
     }
 ]
