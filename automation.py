@@ -60,8 +60,9 @@ def update_json(new_data):
 
     # Handle file uploads
     uploaded_file_path = []
-    for file_path in new_data['file']:
+    if new_data['file']:
         try:
+            file_path = new_data['file']
             # Read the image file
             img_name1 = file_path[5:]
             with open(file_path, 'rb') as img_file:

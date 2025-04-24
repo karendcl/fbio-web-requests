@@ -40,6 +40,8 @@ class WebPostRequest:
             'timestamp': self.timestamp
         }
 
+        print(f'File: {self.file}')
+
         automation.update_json(new_data=new_data)
 
 
