@@ -191,5 +191,19 @@
         "state": "pending",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250424_145205"
+    },
+    {
+        "code": -2628261814760731065,
+        "user_name": "",
+        "user_email": "",
+        "topic": "",
+        "message": "",
+        "images": [
+            "data/image_20250424_105628_home.png"
+        ],
+        "file": [],
+        "state": "pending",
+        "department": "Microbiolog\u00eda",
+        "timestamp": "20250424_105625"
     }
 ]
