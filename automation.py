@@ -59,7 +59,7 @@ def update_json(new_data):
     new_data['images'] = uploaded_image_paths
 
     # Handle file uploads
-    uploaded_file_path = []
+    uploaded_file_path = ''
     if new_data['file']:
         try:
             file_path = new_data['file']
@@ -80,7 +80,7 @@ def update_json(new_data):
                 content=img_content,
                 branch=BRANCH
             )
-            uploaded_file_path.append(github_img_path)
+            uploaded_file_path = github_img_path
         except Exception as e:
             print(f"Failed to upload file {file_path}: {str(e)}")
 
