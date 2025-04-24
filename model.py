@@ -10,12 +10,14 @@ class WebPostRequest:
                  topic,
                  message,
                  images,
-                 department):
+                 department,
+                 file):
         self.user_name = user_name
         self.user_email = user_email
         self.topic = topic
         self.message = message
         self.images = images
+        self.file = file
         self.state = states.PENDING
         self.department = department
         self.timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -32,6 +34,7 @@ class WebPostRequest:
             'topic': self.topic,
             'message': self.message,
             'images': self.images,
+            'file': self.file,
             'state': self.state,
             'department': self.department,
             'timestamp': self.timestamp

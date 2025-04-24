@@ -58,6 +58,34 @@ def update_json(new_data):
     # Update the image paths in the new_data before saving
     new_data['images'] = uploaded_image_paths
 
+    # Handle file uploads
+    uploaded_file_path = []
+    for file_path in new_data['file']:
+        try:
+            # Read the image file
+            img_name1 = file_path[5:]
+            with open(file_path, 'rb') as img_file:
+                img_content = img_file.read()
+
+            # Create filename with timestamp to avoid conflicts
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            img_name = f"file_{timestamp}_{img_name1}"
+            github_img_path = f"data/{img_name}"
+
+            # Upload to GitHub
+            repo.create_file(
+                path=github_img_path,
+                message=f"Add file {img_name}",
+                content=img_content,
+                branch=BRANCH
+            )
+            uploaded_file_path.append(github_img_path)
+        except Exception as e:
+            print(f"Failed to upload file {file_path}: {str(e)}")
+
+    # Update the image paths in the new_data before saving
+    new_data['file'] = uploaded_file_path
+
     # Append the new data (with updated image paths)
     current_data.append(new_data)
 

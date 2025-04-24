@@ -15,7 +15,7 @@ REPO_NAME = "karendcl/fbio-web-requests"  # Your repo
 FILE_PATH = "data.json"  # Path to your JSON file
 BRANCH = "main"  # Branch to update
 
-def reqest_posted(row):
+def request_posted(row):
     """Update the status of the request to 'posted'.
     Remove the images from the github repository.
     """
@@ -30,15 +30,32 @@ def reqest_posted(row):
 
     # Update the status of the request
     for request in current_data:
-        if request['timestamp'] == row['timestamp']:
+        if request['user_name'] == row['user_name'] and \
+                request['topic'] == row['topic'] and \
+                request['department'] == row['department'] and \
+                request['message'] == row['message']:
             request['state'] = 'posted'
-            break
+            # Remove images from the repository
+            if request['images']:
+                for img_path in request['images']:
+                    try:
+                        # Delete the image file from GitHub
+                        repo.delete_file(
+                            path=img_path,
+                            message=f"Delete image {img_path}",
+                            sha=repo.get_contents(img_path).sha,
+                            branch=BRANCH
+                        )
+                    except Exception as e:
+                        print(f"Failed to delete image {img_path}: {str(e)}")
+            request['images'] = []  # Clear the images list
+
 
     # Save the updated JSON file
     repo.update_file(
         path=FILE_PATH,
         message="Update request status to posted",
-        content=json.dumps(current_data),
+        content=json.dumps(current_data, indent=4),
         sha=sha,
         branch=BRANCH
     )
@@ -163,6 +180,8 @@ def main():
             col1, col2 = st.columns(2)
             with col1:
                 if st.button("Posted", key=f"approve_{row_index}"):
+                    request_posted(row)
+                    st.success("Request marked as posted.")
 
 
 
