@@ -42,9 +42,7 @@
         "topic": "a",
         "message": "a",
         "images": [],
-        "file": [
-            "data/file_20250424_104014_DAA__3_.pdf"
-        ],
+        "file": [],
         "state": "posted",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250424_104011"
@@ -56,9 +54,7 @@
         "topic": "a",
         "message": "a",
         "images": [],
-        "file": [
-            "data/file_20250424_104140_DAA__3_.pdf"
-        ],
+        "file": [],
         "state": "posted",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250424_104137"
@@ -153,9 +149,7 @@
         "user_email": "",
         "topic": "",
         "message": "",
-        "images": [
-            "data/image_20250424_105628_home.png"
-        ],
+        "images": [],
         "file": [],
         "state": "posted",
         "department": "Microbiolog\u00eda",
