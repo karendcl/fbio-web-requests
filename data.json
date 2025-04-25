@@ -1,50 +1,5 @@
 [
     {
-        "user_name": "Karen",
-        "user_email": "karen.canterolopez@gmail.com",
-        "topic": "nose",
-        "message": "no se",
-        "images": [],
-        "state": "pending",
-        "department": "Otro"
-    },
-    {
-        "user_name": "nanaaa",
-        "user_email": "aa",
-        "topic": "aa",
-        "message": "aa",
-        "images": [],
-        "state": "posted",
-        "department": "CEP"
-    },
-    {
-        "user_name": "Karencita",
-        "user_email": "qqq",
-        "topic": "a",
-        "message": "njajajsjsjs",
-        "images": [],
-        "state": "posted",
-        "department": "Microbiolog\u00eda"
-    },
-    {
-        "user_name": "Karencita",
-        "user_email": "a",
-        "topic": "qq",
-        "message": "aaa",
-        "images": [],
-        "state": "posted",
-        "department": "Microbiolog\u00eda"
-    },
-    {
-        "user_name": "Prueba 2",
-        "user_email": "Karen.canterolopez@gmail.com",
-        "topic": "Pruebabaaaaa",
-        "message": "Jsjdnd",
-        "images": [],
-        "state": "pending",
-        "department": "Otro"
-    },
-    {
         "code": -5453524711811558448,
         "user_name": "prueba1",
         "user_email": "karen@fbio.com",
