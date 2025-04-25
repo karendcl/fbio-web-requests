@@ -107,7 +107,7 @@
         "message": "",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250424_144858"
     },
@@ -119,7 +119,7 @@
         "message": "",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250424_144943"
     },
@@ -131,7 +131,7 @@
         "message": "",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250424_145036"
     },
@@ -157,7 +157,7 @@
             "data/image_20250424_105628_home.png"
         ],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250424_105625"
     },
