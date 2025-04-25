@@ -181,14 +181,8 @@
         "user_email": "qq",
         "topic": "qq",
         "message": "qq",
-        "images": [
-            "data/image_20250425_154653_home.png",
-            "data/image_20250425_154654_pixlr-image-generator-e9870274-d74e-4b62-bfaa-08556299db78.png",
-            "data/image_20250425_154656_pixlr-image-generator-9d6b8add-672a-42b7-ba5c-5498cfe9cfa8.png"
-        ],
-        "file": [
-            "data/file_20250425_154658_user_guide (3).pdf"
-        ],
+        "images": [],
+        "file": [],
         "state": "posted",
         "department": "Biolog\u00eda Animal y Humana",
         "timestamp": "20250425_154652"
