@@ -165,7 +165,8 @@
         "file": [],
         "state": "posted",
         "department": "Microbiolog\u00eda",
-        "timestamp": "20250425_154535"
+        "timestamp": "20250425_154535",
+        "posted_timestamp": "20250429_121314"
     },
     {
         "code": 1592179802571375109,
@@ -189,9 +190,10 @@
         "file": [
             "data/file_20250429_134648_conferencia-03.pdf"
         ],
-        "state": "pending",
+        "state": "posted",
         "department": "Microbiolog\u00eda",
-        "timestamp": "20250429_134644"
+        "timestamp": "20250429_134644",
+        "posted_timestamp": "20250429_121314"
     },
     {
         "code": -6497140087458080502,
