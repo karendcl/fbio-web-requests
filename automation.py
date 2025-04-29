@@ -84,7 +84,7 @@ def update_json(new_data):
             print(f"Failed to upload file {img_path}: {str(e)}")
 
     # Update the image paths in the new_data before saving
-    new_data['file'] = uploaded_image_paths
+    new_data['file'] = uploaded_file_paths
 
     # Append the new data (with updated image paths)
     current_data.append(new_data)
