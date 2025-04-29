@@ -1,10 +1,13 @@
 import json
+import os
 
 import streamlit as st
 import pandas as pd
 from datetime import datetime
 
 from github import Github
+
+from reports import get_statistics
 
 # MUST be first command
 st.set_page_config(layout="wide")
@@ -17,7 +20,6 @@ BRANCH = "main"  # Branch to update
 
 def request_posted(row):
     """Update the status of the request to 'posted'.
-    Remove the images from the github repository.
     """
 
     g = Github(GITHUB_TOKEN)
@@ -35,21 +37,6 @@ def request_posted(row):
                 request['department'] == row['department'] and \
                 request['message'] == row['message']:
             request['state'] = 'posted'
-            # Remove images from the repository
-            if request['images']:
-                for img_path in request['images']:
-                    try:
-                        # Delete the image file from GitHub
-                        repo.delete_file(
-                            path=img_path,
-                            message=f"Delete image {img_path}",
-                            sha=repo.get_contents(img_path).sha,
-                            branch=BRANCH
-                        )
-                    except Exception as e:
-                        print(f"Failed to delete image {img_path}: {str(e)}")
-            request['images'] = []  # Clear the images list
-
 
     # Save the updated JSON file
     repo.update_file(
@@ -60,10 +47,62 @@ def request_posted(row):
         branch=BRANCH
     )
 
+def action_to_clean_images_and_files():
+    """Clean up images and files from the request."""
+    g = Github(GITHUB_TOKEN)
+    repo = g.get_repo(REPO_NAME)
+
+    # Get current JSON file
+    file = repo.get_contents(FILE_PATH, ref=BRANCH)
+    sha = file.sha
+    current_data = json.loads(file.decoded_content.decode())
+
+    # Clean up images and files
+    for request in current_data:
+        if request['state'] == 'posted':
+            for img_path in request['images']:
+                try:
+                    # Get the SHA of the file to delete
+                    img_name1 = img_path[5:]
+                    img_path = f"data/{img_name1}"
+                    shai = repo.get_contents(img_path, ref=BRANCH).sha
+                    repo.delete_file(
+                        path=img_path,
+                        message=f"Delete image {img_path}",
+                        sha=shai,
+                        branch=BRANCH
+                    )
+                except Exception as e:
+                    print(f"Failed to delete image {img_path}: {str(e)}")
+            for img_path in request['file']:
+                try:
+                    # Get the SHA of the file to delete
+                    img_name1 = img_path[5:]
+                    img_path = f"data/{img_name1}"
+                    shai = repo.get_contents(img_path, ref=BRANCH).sha
+                    repo.delete_file(
+                        path=img_path,
+                        message=f"Delete file {img_path}",
+                        sha=shai,
+                        branch=BRANCH
+                    )
+                except Exception as e:
+                    print(f"Failed to delete file {img_path}: {str(e)}")
 
 
+            request['images'] = []
+            request['file'] = []
 
-# @st.cache_data(ttl=600)
+    # Save the updated JSON file
+    repo.update_file(
+        path=FILE_PATH,
+        message="Clean up images and files",
+        content=json.dumps(current_data, indent=4),
+        sha=sha,
+        branch=BRANCH
+    )
+
+
 def load_data():
     try:
         response = pd.read_json(REPO_URL + 'data.json')
@@ -76,9 +115,7 @@ def load_data():
         return []
 
 
-def main():
-    st.title("📊 Enhanced Request Dashboard")
-
+def get_dataframe():
     # Load data
     data = load_data()
 
@@ -87,6 +124,13 @@ def main():
         return
 
     df = pd.DataFrame(data)
+
+    return df
+
+def main():
+    st.title("📊 Web Request Dashboard")
+
+    df = get_dataframe()
 
     # Sidebar filters and sorting
     with st.sidebar:
@@ -121,6 +165,35 @@ def main():
             options=department_options,
             index=0
         )
+
+        st.divider()
+
+        st.header("Actions")
+        if st.button("Clean Up Images and Files", icon="🧹", help="Clean up images and files from posted requests"):
+            action_to_clean_images_and_files()
+            st.success("Images and files cleaned up successfully.")
+
+        if st.button("Download Monthly Report", icon="📥", help="Download the monthly report"):
+            path, message = get_statistics(year=datetime.now().year, month=datetime.now().month)
+            if path:
+                st.success(f"Report downloaded successfully")
+                with open(path, "rb") as file:
+                    file_contents = file.read()
+
+                # Get just the filename from the full path
+                filename = os.path.basename(path)
+
+                # Offer the file for download
+                st.download_button(
+                    label="Download Report",
+                    data=file_contents,
+                    file_name=filename,
+                    mime="text/html",
+                    help="Click to download the HTML report"
+                )
+
+            else:
+                st.error(f"Failed: {message}")
 
     # Apply filters
     filtered_df = df.copy()
@@ -175,6 +248,16 @@ def main():
                         path = path.replace(' ', '%20')
 
                         st.markdown(f"[Download Image {i}]({path})", unsafe_allow_html=True)
+
+            if 'file' in row and row['file']:
+                st.subheader(f"Attached Files ({len(row['file'])})")
+                cols = st.columns(min(3, len(row['file'])))
+                for i, img_url in enumerate(row['file']):
+                    with cols[i % 3]:
+                        path = REPO_URL + img_url
+                        path = path.replace(' ', '%20')
+
+                        st.markdown(f"[Download File {i}]({path})", unsafe_allow_html=True)
 
             # Action buttons
             col1, col2 = st.columns(2)

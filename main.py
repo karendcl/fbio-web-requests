@@ -18,7 +18,7 @@ def main():
         topic = st.text_input("Tema")
         message = st.text_area("Message")
         images = st.file_uploader("Upload Images", type=['jpg', 'png'], accept_multiple_files=True)
-        file = st.file_uploader("Upload File", type=['pdf', 'docx'], accept_multiple_files=False)
+        files = st.file_uploader("Upload File", type=['pdf', 'docx'], accept_multiple_files=True)
 
         submit_button = st.form_submit_button(label='Submit')
 
@@ -30,12 +30,13 @@ def main():
                     with open(image_path, "wb") as f:
                         f.write(image.getbuffer())
                     image_paths.append(image_path)
-                file_path = None
-                if file:
+                file_paths = []
+                for file in files:
                     file_path = f"data/{file.name}"
                     with open(file_path, "wb") as f:
                         f.write(file.getbuffer())
-                WebPostRequest(user_name, user_email, topic, message, image_paths, department, file_path)
+                    file_paths.append(file_path)
+                WebPostRequest(user_name, user_email, topic, message, image_paths, department, file_paths)
                 st.success("Su peticion ha sido enviada con exito. Se le notificará por correo electrónico cuando su publicación sea aprobada. Gracias por su paciencia. ")
                 st.balloons()
             except Exception as e:
