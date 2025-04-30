@@ -16,11 +16,11 @@ def main():
                                    "Otro"],
                                   help="Seleccione el departamento al que pertenece")
         topic = st.text_input("Tema")
-        message = st.text_area("Message")
-        images = st.file_uploader("Upload Images", type=['jpg', 'png'], accept_multiple_files=True)
-        files = st.file_uploader("Upload File", type=['pdf', 'docx'], accept_multiple_files=True)
+        message = st.text_area("Mensaje", help="Escriba su mensaje aquí. Si tiene un archivo o imagen que desea adjuntar, por favor, cárguelo a continuación.")
+        images = st.file_uploader("Adjuntar Imágenes", type=['jpg', 'png'], accept_multiple_files=True)
+        files = st.file_uploader("Adjuntar Archivos", type=['pdf', 'docx'], accept_multiple_files=True)
 
-        submit_button = st.form_submit_button(label='Submit')
+        submit_button = st.form_submit_button(label='Enviar')
 
         if submit_button:
             try:
