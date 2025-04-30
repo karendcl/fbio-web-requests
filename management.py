@@ -18,10 +18,31 @@ REPO_NAME = "karendcl/fbio-web-requests"  # Your repo
 FILE_PATH = "data.json"  # Path to your JSON file
 BRANCH = "main"  # Branch to update
 
+def generate_email_content(row):
+    """Generate email content for the request."""
+    email_content = f"""
+    Tema: Referente a su solicitud de publicación en la página web
+    
+    Estimado/a {row['user_name']},
+
+    Su solicitud de publicación en la página web ha sido publicada. A continuación se detallan los datos de su solicitud:
+
+    Nombre: {row['user_name']}
+    Email: {row['user_email']}
+    Departamento: {row['department']}
+    Tema: {row['topic']}
+    Mensaje: {row['message']}
+    Cantidad de fotos recibidas: {len(row['images'])}
+    Cantidad de archivos recibidos: {len(row['file'])}
+
+    Gracias por su paciencia.
+    Contacte a la administración si tiene alguna pregunta o inquietud.
+    """
+    return email_content
+
 def request_posted(row):
     """Update the status of the request to 'posted'.
     """
-
     g = Github(GITHUB_TOKEN)
     repo = g.get_repo(REPO_NAME)
 
@@ -37,6 +58,7 @@ def request_posted(row):
                 request['department'] == row['department'] and \
                 request['message'] == row['message']:
             request['state'] = 'posted'
+            request['posted_timestamp'] = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # Save the updated JSON file
     repo.update_file(
@@ -138,8 +160,6 @@ def main():
 
         # Sorting options
         sort_options = {
-            "Date (Newest First)": "timestamp_desc",
-            "Date (Oldest First)": "timestamp_asc",
             "Name (A-Z)": "name_asc",
             "Name (Z-A)": "name_desc",
             "Status": "status"
@@ -173,10 +193,10 @@ def main():
             action_to_clean_images_and_files()
             st.success("Images and files cleaned up successfully.")
 
-        if st.button("Download Monthly Report", icon="📥", help="Download the monthly report"):
+        if st.button("Generate Monthly Report", icon="📊", help="Download the monthly report"):
             path, message = get_statistics(year=datetime.now().year, month=datetime.now().month)
             if path:
-                st.success(f"Report downloaded successfully")
+                st.success(f"Report generated successfully")
                 with open(path, "rb") as file:
                     file_contents = file.read()
 
@@ -189,7 +209,8 @@ def main():
                     data=file_contents,
                     file_name=filename,
                     mime="text/html",
-                    help="Click to download the HTML report"
+                    help="Click to download the HTML report",
+                    icon = "📥",
                 )
 
             else:
@@ -224,8 +245,7 @@ def main():
 
     # Display data with action buttons
     for row_index, row in filtered_df.iterrows():
-        with st.expander(f"{row.get('user_name', 'N/A')} - {row.get('state', 'N/A')} - "
-                         f"{row.get('timestamp', '').strftime("%Y%m%d_%H%M%S") if pd.notna(row.get('timestamp')) else 'No Date'}",
+        with st.expander(f"{row.get('user_name', 'N/A')} ({row.get('user_email','N/A')}) - {row.get('state', 'N/A')} ",
                          expanded=False):
             col1, col2 = st.columns(2)
             with col1:
@@ -265,6 +285,13 @@ def main():
                 if st.button("Posted", key=f"approve_{row_index}"):
                     request_posted(row)
                     st.success("Request marked as posted.")
+            with col2:
+                if st.button("Generate Email", key=f"email_{row_index}"):
+                    email_content = generate_email_content(row)
+                    st.subheader("Email Content")
+                    st.code(email_content, language="markdown")
+
+                    st.success("Email generated successfully.")
 
 
 

@@ -1,7 +1,7 @@
 
 import states
 import automation
-import datetime
+from datetime import datetime
 
 class WebPostRequest:
     def __init__(self,
@@ -20,7 +20,7 @@ class WebPostRequest:
         self.file = file
         self.state = states.PENDING
         self.department = department
-        self.timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         self.code = hash(f"{self.user_name}{self.topic}{self.department}{self.message}")
 
         self.save_to_json()

@@ -66,19 +66,30 @@ def generate_graphs(dept_stats, timestamp, report_dir):
     return pie_chart_path, bar_chart_path
 
 def generate_report_html(month, year, total_requests, total_pending, total_approved, dept_stats, pie_chart_path, bar_chart_path,
-                         report_dir, timestamp):
+                         report_dir, timestamp, user_stats, total_approved_perc, total_historical_approved_perc,
+                         total_historical_requests, total_historical_pending, total_historical_approved):
     heading = f"Reporte {'mensual' if month else 'anual'} {'- ' + str(month) if month else ''} {year if year else ''}"
+    date = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
     # Generate report by taking the report_template in html and replacing the variables
     template_url = 'report_template.html'
     with open(template_url, 'r', encoding='utf-8') as f:
         report_template = f.read()
 
+    report_template = report_template.replace("DATE", date)
+    report_template = report_template.replace("TOTAL_HISTORICAL_REQUESTS", str(total_historical_requests))
+    report_template = report_template.replace("TOTAL_HISTORICAL_PENDING", str(total_historical_pending))
+    report_template = report_template.replace("TOTAL_HISTORICAL_APPROVED_PERC", str(total_historical_approved_perc))
+    report_template = report_template.replace("TOTAL_HISTORICAL_APPROVED", str(total_historical_approved))
+
+
     report_template = report_template.replace("HEADING", heading)
     report_template = report_template.replace("TOTAL_REQUESTS", str(total_requests))
     report_template = report_template.replace("TOTAL_PENDING", str(total_pending))
+    report_template = report_template.replace("TOTAL_APPROVED_PERC", str(total_approved_perc))
     report_template = report_template.replace("TOTAL_APPROVED", str(total_approved))
     report_template = report_template.replace("DEPARTMENT_TABLES", dept_stats.to_html())
+    report_template = report_template.replace("USER_TABLES", user_stats.to_html())
     report_template = report_template.replace("IMAGE_TOTAL_DEPARTMENTS", pie_chart_path)
     report_template = report_template.replace("IMAGE_STATE_DEPARTMENTS", bar_chart_path)
     # Save report
@@ -95,6 +106,11 @@ def get_statistics(year=None, month=None):
         df = pd.DataFrame(get_json())
         df['timestamp'] = pd.to_datetime(df['timestamp'], format="%Y%m%d_%H%M%S")
 
+        total_historical_requests = len(df)
+        total_historical_pending = len(df[df['state'] == 'pending'])
+        total_historical_approved = len(df[df['state'] == 'posted'])
+        total_historical_approved_perc = round(((total_historical_approved / total_historical_requests) * 100), 2) if total_historical_requests > 0 else 0
+
         # Filter data
         if year:
             df = df[df['timestamp'].dt.year == year]
@@ -105,6 +121,7 @@ def get_statistics(year=None, month=None):
         total_requests = len(df)
         total_pending = len(df[df['state'] == 'pending'])
         total_approved = len(df[df['state'] == 'posted'])
+        total_approved_perc = round(((total_approved / total_requests) * 100), 2) if total_requests > 0 else 0
 
         # Department-wise statistics
         # Department statistics - FIXED THE COLUMN MISMATCH HERE
@@ -135,8 +152,45 @@ def get_statistics(year=None, month=None):
         # Final formatting
         dept_stats['Departmento'] = dept_stats['Departmento'].str.capitalize()
         dept_stats = dept_stats.sort_values('Total de Solicitudes', ascending=False)
-        dept_stats = dept_stats.set_index('Departmento')
 
+
+        # Add a column for the percentage of posted requests per department
+        dept_stats['% Publicada'] = (dept_stats['Publicada'] / dept_stats['Total de Solicitudes']) * 100
+        dept_stats['% Publicada'] = dept_stats['% Publicada'].fillna(0).round(2)
+        dept_stats['% Publicada'] = dept_stats['% Publicada'].astype(str) + '%'
+
+
+        # Add a column for the percentage of posted requests per department
+        dept_stats['% Publicada del total'] = (dept_stats['Publicada'] / total_approved) * 100
+        dept_stats['% Publicada del total'] = dept_stats['% Publicada del total'].fillna(0).round(2)
+        dept_stats['% Publicada del total'] = dept_stats['% Publicada del total'].astype(str) + '%'
+
+        user_stats = (
+            df.groupby('user_email')
+            .agg(
+                Total_Solicitudes=('user_email', 'count'),
+                Departamento=('department', lambda x: x.mode()[0] if len(x.mode()) > 0 else 'N/A')
+            )
+            .reset_index()
+            .rename(columns={
+                'user_email': 'Usuario',
+                'Total_Solicitudes': 'Total Solicitudes',
+                'Departamento': 'Departamento'
+            })
+        )
+
+        # Calculate percentage of total requests
+        user_stats['% del Total'] = (
+                (user_stats['Total Solicitudes'] / total_requests * 100)
+                .round(2)
+                .astype(str) + '%'
+        )
+
+        # Sort by most active users
+        user_stats = user_stats.sort_values('Total Solicitudes', ascending=False)
+
+        # Reset index for cleaner output
+        user_stats = user_stats.reset_index(drop=True)
 
         # Create output directory if it doesn't exist
         report_dir = os.path.join(os.getcwd(), 'reports')
@@ -149,7 +203,8 @@ def get_statistics(year=None, month=None):
 
         report_path = generate_report_html(month, year, total_requests, total_pending, total_approved,
                                            dept_stats, pie_chart_path, bar_chart_path,
-                                           report_dir, timestamp)
+                                           report_dir, timestamp, user_stats, total_approved_perc, total_historical_approved_perc,
+                                           total_historical_requests, total_historical_pending, total_historical_approved)
         return report_path, 'success'
 
     except Exception as e:

@@ -68,12 +68,18 @@
 </head>
 <body>
     <h1>HEADING</h1>
+    <p><strong>Fecha de Generación:</strong> DATE</p>
+    <h2> Resumen de Estadísticas Totales </h2>
+    <ul>
+        <li><strong>Solicitudes Totales:</strong> TOTAL_HISTORICAL_REQUESTS</li>
+        <li><strong>Solicitudes Pendientes:</strong> TOTAL_HISTORICAL_PENDING</li>
+        <li><strong>Solicitudes Publicadas/Completadas:</strong> TOTAL_HISTORICAL_APPROVED ( TOTAL_HISTORICAL_APPROVED_PERC % )</li>
 
-    <h2>Resumen de Estadísticas</h2>
+    <h2>Resumen de Estadísticas Mensuales</h2>
     <ul>
         <li><strong>Solicitudes Totales:</strong> TOTAL_REQUESTS</li>
         <li><strong>Solicitudes Pendientes:</strong> TOTAL_PENDING</li>
-        <li><strong>Solicitudes Publicadas/Completadas:</strong> TOTAL_APPROVED</li>
+        <li><strong>Solicitudes Publicadas/Completadas:</strong> TOTAL_APPROVED ( TOTAL_APPROVED_PERC % )</li>
     </ul>
 
     <h2>Estadísticas por Departamento</h2>
@@ -82,10 +88,10 @@
     <div class="image-grid">
         <img src="IMAGE_TOTAL_DEPARTMENTS" alt="Total de solicitudes por departamento">
         <img src="IMAGE_STATE_DEPARTMENTS" alt="Estado de solicitudes por departamento">
-        <!-- Add two more images here if you have them -->
-        <!-- <img src="IMAGE3" alt="Description 3"> -->
-        <!-- <img src="IMAGE4" alt="Description 4"> -->
     </div>
+
+     <h2> Estadística por Usuario</h2>
+    USER_TABLES
 
     <script>
         <!-- print mode -->
