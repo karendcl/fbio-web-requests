@@ -38,6 +38,9 @@ import os
 from datetime import datetime
 
 def generate_graphs(dept_stats, timestamp, report_dir):
+    # validate that there is at least one post
+    if dept_stats.empty:
+        return '', ''
     # Generate charts
     plt.figure(figsize=(10, 6))
     dept_stats['Total de Solicitudes'].plot.pie(autopct='%1.1f%%', startangle=90)
@@ -67,7 +70,7 @@ def generate_graphs(dept_stats, timestamp, report_dir):
 
 def generate_report_html(month, year, total_requests, total_pending, total_approved, dept_stats, pie_chart_path, bar_chart_path,
                          report_dir, timestamp, user_stats, total_approved_perc, total_historical_approved_perc,
-                         total_historical_requests, total_historical_pending, total_historical_approved):
+                         total_historical_requests, total_historical_pending, total_historical_approved, post_stats):
     heading = f"Reporte {'mensual' if month else 'anual'} {'- ' + str(month) if month else ''} {year if year else ''}"
     date = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
@@ -90,6 +93,7 @@ def generate_report_html(month, year, total_requests, total_pending, total_appro
     report_template = report_template.replace("TOTAL_APPROVED", str(total_approved))
     report_template = report_template.replace("DEPARTMENT_TABLES", dept_stats.to_html())
     report_template = report_template.replace("USER_TABLES", user_stats.to_html())
+    report_template = report_template.replace("POST_TABLES", post_stats.to_html())
     report_template = report_template.replace("IMAGE_TOTAL_DEPARTMENTS", pie_chart_path)
     report_template = report_template.replace("IMAGE_STATE_DEPARTMENTS", bar_chart_path)
     # Save report
@@ -165,6 +169,18 @@ def get_statistics(year=None, month=None):
         dept_stats['% Publicada del total'] = dept_stats['% Publicada del total'].fillna(0).round(2)
         dept_stats['% Publicada del total'] = dept_stats['% Publicada del total'].astype(str) + '%'
 
+        all_posts = df[df['state'] == 'posted']
+        # Make a table with topic and message per posted post
+        all_posts = all_posts[['topic', 'message', 'department']]
+        all_posts = all_posts.rename(columns={
+            'topic': 'Tema',
+            'message': 'Mensaje',
+            'department': 'Departamento'
+        })
+        all_posts = all_posts.reset_index(drop=True)
+
+
+
         user_stats = (
             df.groupby('user_email')
             .agg(
@@ -204,7 +220,7 @@ def get_statistics(year=None, month=None):
         report_path = generate_report_html(month, year, total_requests, total_pending, total_approved,
                                            dept_stats, pie_chart_path, bar_chart_path,
                                            report_dir, timestamp, user_stats, total_approved_perc, total_historical_approved_perc,
-                                           total_historical_requests, total_historical_pending, total_historical_approved)
+                                           total_historical_requests, total_historical_pending, total_historical_approved, all_posts)
         return report_path, 'success'
 
     except Exception as e:

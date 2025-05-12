@@ -11,14 +11,15 @@ class WebPostRequest:
                  message,
                  images,
                  department,
-                 file):
+                 file,
+                 state = states.PENDING):
         self.user_name = user_name
         self.user_email = user_email
         self.topic = topic
         self.message = message
         self.images = images
         self.file = file
-        self.state = states.PENDING
+        self.state = state
         self.department = department
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         self.code = hash(f"{self.user_name}{self.topic}{self.department}{self.message}")

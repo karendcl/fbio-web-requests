@@ -7,6 +7,8 @@ from datetime import datetime
 
 from github import Github
 
+import states
+from model import WebPostRequest
 from reports import get_statistics
 
 # MUST be first command
@@ -39,6 +41,20 @@ def generate_email_content(row):
     Contacte a la administración si tiene alguna pregunta o inquietud.
     """
     return email_content
+
+def post_administrative_task(topic, message):
+    """Post to the github repo a post as 'posted' from the 'Computación' department.
+    """
+    WebPostRequest(
+                user_name="Administración",
+                user_email="karen.cantero@fbio.uh.cu",
+                topic=topic,
+                message=message,
+                images=[],
+                department="Computación",
+                file=[],
+                state=states.POSTED)
+
 
 def request_posted(row):
     """Update the status of the request to 'posted'.
@@ -193,7 +209,7 @@ def main():
             action_to_clean_images_and_files()
             st.success("Images and files cleaned up successfully.")
 
-        if st.button("Generate Monthly Report", icon="📊", help="Download the monthly report"):
+        if st.button("Generate Monthly Report", icon="📊", help="Generate the monthly report"):
             path, message = get_statistics(year=datetime.now().year, month=datetime.now().month)
             if path:
                 st.success(f"Report generated successfully")
@@ -215,6 +231,20 @@ def main():
 
             else:
                 st.error(f"Failed: {message}")
+
+        st.divider()
+        st.header("Post Administrative Task")
+
+        with st.form(key='admin_task_form', clear_on_submit=True):
+            topic = st.text_input("Topic")
+            message = st.text_area("Message")
+            submit_button = st.form_submit_button(label='Post Administrative Task',
+                                                  help="Post an administrative task")
+
+            if submit_button:
+                print(topic, message)
+                post_administrative_task(topic, message)
+                st.success("Administrative task posted successfully.")
 
     # Apply filters
     filtered_df = df.copy()
