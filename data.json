@@ -235,5 +235,17 @@
         "state": "pending",
         "department": "Microbiolog\u00eda",
         "timestamp": "20250430_161436"
+    },
+    {
+        "code": 7524578124766794749,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "claustro",
+        "message": "update",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250512_100631"
     }
 ]
