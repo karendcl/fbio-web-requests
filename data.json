@@ -261,9 +261,10 @@
             "data/image_20250514_184111_Screenshot 2025-04-03 172941.png"
         ],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Otro",
-        "timestamp": "20250514_184106"
+        "timestamp": "20250514_184106",
+        "posted_timestamp": "20250514_144455"
     },
     {
         "code": 2446960055472588895,
