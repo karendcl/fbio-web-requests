@@ -247,5 +247,22 @@
         "state": "posted",
         "department": "Computaci\u00f3n",
         "timestamp": "20250512_100631"
+    },
+    {
+        "code": -7236642867573280038,
+        "user_name": "Karen",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Publicacion sobre Jornada Cientifica",
+        "message": "Hola. Hace falta publicar en el apartado de investigacion, una publicidad sobre la jornada cientifica con un link para que los estudiantes manden sus trabajos",
+        "images": [
+            "data/image_20250514_184106_Screenshot 2025-04-18 152006.png",
+            "data/image_20250514_184107_Screenshot 2025-04-18 120302.png",
+            "data/image_20250514_184109_Screenshot 2025-04-11 120939.png",
+            "data/image_20250514_184111_Screenshot 2025-04-03 172941.png"
+        ],
+        "file": [],
+        "state": "pending",
+        "department": "Otro",
+        "timestamp": "20250514_184106"
     }
 ]
