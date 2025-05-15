@@ -288,5 +288,21 @@
         "state": "posted",
         "department": "Computaci\u00f3n",
         "timestamp": "20250514_145029"
+    },
+    {
+        "code": 3558650521225632609,
+        "user_name": "Andr\u00e9s",
+        "user_email": "andres@fbio.uh.cu",
+        "topic": "P\u00e1gina de Computaci\u00f3n",
+        "message": "Este es el mensaje",
+        "images": [
+            "data/image_20250515_141648_FachadaFBio_2023_02.jpg"
+        ],
+        "file": [
+            "data/file_20250515_141650_Modelo2PlanillaDatosDoctornado.docx"
+        ],
+        "state": "pending",
+        "department": "Otro",
+        "timestamp": "20250515_141647"
     }
 ]
