@@ -37,13 +37,19 @@ import matplotlib.pyplot as plt
 import os
 from datetime import datetime
 
+
 def generate_graphs(dept_stats, timestamp, report_dir):
     # validate that there is at least one post
     if dept_stats.empty:
         return '', ''
+
     # Generate charts
     plt.figure(figsize=(10, 6))
-    dept_stats['Total de Solicitudes'].plot.pie(autopct='%1.1f%%', startangle=90)
+    dept_stats['Total de Solicitudes'].plot.pie(
+        labels=dept_stats['Departamento'],  # Use department names as labels
+        autopct='%1.1f%%',
+        startangle=90
+    )
     plt.axis('equal')
     plt.title('Total de Solicitudes por Departamento')
     pie_chart_name = f'total_requests_pie_{timestamp}.png'
@@ -52,12 +58,12 @@ def generate_graphs(dept_stats, timestamp, report_dir):
     plt.close()
 
     plt.figure(figsize=(12, 6))
-    dept_stats[['Pendiente', 'Publicada']].plot(kind='bar')
+    ax = dept_stats[['Pendiente', 'Publicada']].plot(kind='bar')
     plt.title('Estado de Solicitudes por Departamento')
-    plt.xlabel('Departmento')
+    plt.xlabel('Departamento')
     plt.ylabel('Cantidad de Solicitudes')
-    # labels horizontally
-    plt.xticks(rotation=45)
+    # Set department names as x-axis labels
+    ax.set_xticklabels(dept_stats['Departamento'], rotation=45)
     plt.legend(title='Estado de Solicitud', labels=['Pendiente', 'Publicada'])
     plt.tight_layout()
 
@@ -130,7 +136,7 @@ def get_statistics(year=None, month=None):
         # Department-wise statistics
         # Department statistics - FIXED THE COLUMN MISMATCH HERE
         dept_counts = df['department'].value_counts().reset_index()
-        dept_counts.columns = ['Departmento', 'Total de Solicitudes']  # Only 2 columns here
+        dept_counts.columns = ['Departamento', 'Total de Solicitudes']  # Only 2 columns here
 
         # Calculate pending and approved separately
         pending = df[df['state'] == 'pending']['department'].value_counts()
@@ -139,12 +145,12 @@ def get_statistics(year=None, month=None):
         # Merge all statistics
         dept_stats = dept_counts.merge(
             pending.rename('Pendiente'),
-            left_on='Departmento',
+            left_on='Departamento',
             right_index=True,
             how='left'
         ).merge(
             approved.rename('Publicada'),
-            left_on='Departmento',
+            left_on='Departamento',
             right_index=True,
             how='left'
         ).fillna(0)
@@ -154,7 +160,7 @@ def get_statistics(year=None, month=None):
         dept_stats['Publicada'] = dept_stats['Publicada'].astype(int)
 
         # Final formatting
-        dept_stats['Departmento'] = dept_stats['Departmento'].str.capitalize()
+        dept_stats['Departamento'] = dept_stats['Departamento'].str.capitalize()
         dept_stats = dept_stats.sort_values('Total de Solicitudes', ascending=False)
 
 
