@@ -22,5 +22,17 @@
         "state": "posted",
         "department": "Computaci\u00f3n",
         "timestamp": "20250519_130221"
+    },
+    {
+        "code": 5460678447262010286,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Profesores Em\u00e9ritos",
+        "message": "Actualizaci\u00f3n de profesores em\u00e9ritos. Usando fotos que antes no se veian",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250519_130308"
     }
 ]
