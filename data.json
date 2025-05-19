@@ -247,5 +247,62 @@
         "state": "posted",
         "department": "Computaci\u00f3n",
         "timestamp": "20250512_100631"
+    },
+    {
+        "code": -7236642867573280038,
+        "user_name": "Karen",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Publicacion sobre Jornada Cientifica",
+        "message": "Hola. Hace falta publicar en el apartado de investigacion, una publicidad sobre la jornada cientifica con un link para que los estudiantes manden sus trabajos",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Otro",
+        "timestamp": "20250514_184106",
+        "posted_timestamp": "20250514_144455"
+    },
+    {
+        "code": 2446960055472588895,
+        "user_name": "prob",
+        "user_email": "qqq",
+        "topic": "lo q tu quieras",
+        "message": "hola",
+        "images": [],
+        "file": [
+            "data/file_20250514_184319_conferencia-03.pdf",
+            "data/file_20250514_184320_conferencia-04.pdf",
+            "data/file_20250514_184322_Report.pdf"
+        ],
+        "state": "pending",
+        "department": "Microbiolog\u00eda",
+        "timestamp": "20250514_184318"
+    },
+    {
+        "code": 8232569203354166279,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Ajuste del claustro",
+        "message": "Cambio en la visualizacion (usando fotos)",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250514_145029"
+    },
+    {
+        "code": 3558650521225632609,
+        "user_name": "Andr\u00e9s",
+        "user_email": "andres@fbio.uh.cu",
+        "topic": "P\u00e1gina de Computaci\u00f3n",
+        "message": "Este es el mensaje",
+        "images": [
+            "data/image_20250515_141648_FachadaFBio_2023_02.jpg"
+        ],
+        "file": [
+            "data/file_20250515_141650_Modelo2PlanillaDatosDoctornado.docx"
+        ],
+        "state": "pending",
+        "department": "Otro",
+        "timestamp": "20250515_141647"
     }
 ]
