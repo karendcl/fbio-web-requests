@@ -1,5 +1,5 @@
 [
-  {
+    {
         "code": 8232569203354166279,
         "user_name": "Administraci\u00f3n",
         "user_email": "karen.cantero@fbio.uh.cu",
@@ -10,5 +10,17 @@
         "state": "posted",
         "department": "Computaci\u00f3n",
         "timestamp": "20250514_145029"
+    },
+    {
+        "code": 790357008425638753,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Consejo de Direcci\u00f3n",
+        "message": "Ajuste en la visualizaci\u00f3n (arreglar las fotos que antes no se visualizaban)",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250519_130221"
     }
 ]
