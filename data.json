@@ -82,5 +82,17 @@
         "state": "posted",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_142741"
+    },
+    {
+        "code": 497789389323752172,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Areas/Departamentos/Microbiolog\u00eda:",
+        "message": "\n-El Jefe del Dpto ya no es Michel Almaguer, sino Acela (busca sus datos en Claustro para que tengas bien nombre completo)",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_142805"
     }
 ]
