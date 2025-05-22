@@ -226,5 +226,17 @@
         "state": "pending",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_151932"
+    },
+    {
+        "code": 3662786999497372792,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Biblioteca sumar 3 pesta\u00f1as",
+        "message": "Encontre en Areas una pagina de biblioteca que esta completa. Creo que hay que hacer algo unico y no que desde ahi tengan 3 pestannas",
+        "images": [],
+        "file": [],
+        "state": "pending",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_152557"
     }
 ]
