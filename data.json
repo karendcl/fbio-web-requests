@@ -202,5 +202,17 @@
         "state": "pending",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_143038"
+    },
+    {
+        "code": -7060646270793629389,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Biblioteca",
+        "message": "En el menu de abajo hay un link a Biblioteca. Eso me lleva a una pagina donde solo funciona el link de la biblioteca central. Es importante incorporar este link que lleva al repositorio de la UH donde estan todas las tesis",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_151748"
     }
 ]
