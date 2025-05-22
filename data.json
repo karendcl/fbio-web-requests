@@ -166,5 +166,17 @@
         "state": "pending",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_142951"
+    },
+    {
+        "code": -3469096408279549703,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "link",
+        "message": "El link para la Revista del Jardin Botanico Nacional no Funciona",
+        "images": [],
+        "file": [],
+        "state": "pending",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_143004"
     }
 ]
