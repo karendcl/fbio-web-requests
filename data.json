@@ -190,5 +190,17 @@
         "state": "pending",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_143025"
+    },
+    {
+        "code": 4331644608516707997,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Extension",
+        "message": "En extensi\u00f3n tambien incluir al MOvimiento Juvenil Martiano",
+        "images": [],
+        "file": [],
+        "state": "pending",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_143038"
     }
 ]
