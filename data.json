@@ -94,5 +94,17 @@
         "state": "posted",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_142805"
+    },
+    {
+        "code": -3551548777397507388,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Areas/Departamentos/Bioqu\u00edmica:",
+        "message": "\n-El Jefe del Dpto ya no es Jorge Gonzalez, sino Rady Laborde (busca sus datos en Claustro para que tengas bien nombre completo)",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_142820"
     }
 ]
