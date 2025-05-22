@@ -70,5 +70,17 @@
         "state": "pending",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_142718"
+    },
+    {
+        "code": -7583671439919776741,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Claustro",
+        "message": "-Elimina a Isabel Medina (Elimina del Dpto Biologia vegetal, es trabajadora de secretaria ahora)\n-Elimina a Diego Alameda (Elimina del Dpto Biologia vegetal, es trabajador del Dpto Biologia Animal y Humana)\n-Elimina a Angelica Toledo (ya no trabaja en Fbio)\n-Elimina a Katherine Meiramas (ya no trabaja en Fbio)\n-Annade a Jesus David Mojarena Lavandera en Dpto BV",
+        "images": [],
+        "file": [],
+        "state": "posted",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_142741"
     }
 ]
