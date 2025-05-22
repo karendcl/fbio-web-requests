@@ -154,5 +154,17 @@
         "state": "pending",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_142934"
+    },
+    {
+        "code": -5881836139308515644,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "links",
+        "message": "Pienso en algun lugar hay que ponerle un link para el correo de estudiantes y correo de trabajadores",
+        "images": [],
+        "file": [],
+        "state": "pending",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_142951"
     }
 ]
