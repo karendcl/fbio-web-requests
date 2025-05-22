@@ -178,5 +178,17 @@
         "state": "pending",
         "department": "Computaci\u00f3n",
         "timestamp": "20250522_143004"
+    },
+    {
+        "code": -6073647844173262054,
+        "user_name": "Administraci\u00f3n",
+        "user_email": "karen.cantero@fbio.uh.cu",
+        "topic": "Revista Juvenis Sapiens",
+        "message": "Hay que hacerle una pagina a la Revista Juvenis sapiens (es la revista de los Estudiantes nuestros). Intentar\u00e9 buscar la informacion y los numeros que han salido para ponerlos",
+        "images": [],
+        "file": [],
+        "state": "pending",
+        "department": "Computaci\u00f3n",
+        "timestamp": "20250522_143025"
     }
 ]
