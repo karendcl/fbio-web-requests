@@ -67,9 +67,10 @@
         "message": "donde est\u00e1n las fotos del Claustro/Consejo Direccion/Consejo cient\u00edfico, creo que el tamanno de las fotos pudiera ser menor. Asi caben mas en una pagina y no queda tan grande",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Computaci\u00f3n",
-        "timestamp": "20250522_142718"
+        "timestamp": "20250522_142718",
+        "posted_timestamp": "20250523_140816"
     },
     {
         "code": -7583671439919776741,
