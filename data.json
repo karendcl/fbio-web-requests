@@ -176,9 +176,10 @@
         "message": "El link para la Revista del Jardin Botanico Nacional no Funciona",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Computaci\u00f3n",
-        "timestamp": "20250522_143004"
+        "timestamp": "20250522_143004",
+        "posted_timestamp": "20250523_140836"
     },
     {
         "code": -6073647844173262054,
