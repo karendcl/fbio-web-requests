@@ -164,9 +164,10 @@
         "message": "Pienso en algun lugar hay que ponerle un link para el correo de estudiantes y correo de trabajadores",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Computaci\u00f3n",
-        "timestamp": "20250522_142951"
+        "timestamp": "20250522_142951",
+        "posted_timestamp": "20250523_143148"
     },
     {
         "code": -3469096408279549703,
