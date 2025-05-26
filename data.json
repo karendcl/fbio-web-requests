@@ -239,8 +239,9 @@
         "message": "Encontre en Areas una pagina de biblioteca que esta completa. Creo que hay que hacer algo unico y no que desde ahi tengan 3 pestannas",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Computaci\u00f3n",
-        "timestamp": "20250522_152557"
+        "timestamp": "20250522_152557",
+        "posted_timestamp": "20250526_104919"
     }
 ]
