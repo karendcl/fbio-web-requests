@@ -55,9 +55,10 @@
         "message": "Actualizar los grupos + Usar fotos para su visualizacion",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Computaci\u00f3n",
-        "timestamp": "20250519_130954"
+        "timestamp": "20250519_130954",
+        "posted_timestamp": "20250526_121523"
     },
     {
         "code": -5158774561702735301,
