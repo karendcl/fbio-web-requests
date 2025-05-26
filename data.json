@@ -202,9 +202,10 @@
         "message": "En extensi\u00f3n tambien incluir al MOvimiento Juvenil Martiano",
         "images": [],
         "file": [],
-        "state": "pending",
+        "state": "posted",
         "department": "Computaci\u00f3n",
-        "timestamp": "20250522_143038"
+        "timestamp": "20250522_143038",
+        "posted_timestamp": "20250526_092611"
     },
     {
         "code": -7060646270793629389,
